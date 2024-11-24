@@ -82,22 +82,6 @@ fun LoginForm(context: Context, navController: NavController) {
                     Text(text = "login", fontSize = 18.sp)
 
                 }
-//                Row {
-//                    Text(text = "Email", modifier = Modifier
-//                        .align(Alignment.CenterVertically))
-//                    TextField(
-//                        value = "email", onValueChange = {}, modifier = Modifier
-//                            .padding(top = 0.dp)
-//                            .wrapContentSize()
-//                    )
-//                }
-//                Row {
-//                    Column {
-//                        Text(text = "Password")
-//                        TextField(value = "password", onValueChange = {}, modifier = Modifier)
-//                    }
-//                }
-
             }
         }
         Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
@@ -110,9 +94,6 @@ fun LoginForm(context: Context, navController: NavController) {
                 )
             }
             Column {
-//                Button(onClick = { /*TODO*/ }) {
-//
-//                }
                 Text(text = "SIGN UP",
                     fontSize = 18.sp,
                     modifier = Modifier
@@ -145,7 +126,11 @@ fun FormField(
                 label={ Text("enter $label") },
                 placeholder = { Text("enter $label") },
                 value=textState,
-                onValueChange = onTextChange,
+                onValueChange = {newValue ->
+                    if (newValue.all { it.isDigit() }){
+                        onTextChange(newValue)
+                    }
+                },
                 modifier = Modifier
                     .padding(start = 16.dp)
                     .weight(2f),
@@ -159,11 +144,7 @@ fun FormField(
                 label={ Text("enter $label") },
                 placeholder = { Text("enter $label") },
                 value=textState,
-                onValueChange = {newValue ->
-                    if (newValue.all { it.isDigit() }){
-                        onTextChange(newValue)
-                    }
-                },
+                onValueChange = onTextChange,
                 modifier = Modifier
                     .padding(start = 16.dp)
                     .weight(2f),

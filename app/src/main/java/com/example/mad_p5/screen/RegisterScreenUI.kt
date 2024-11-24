@@ -126,7 +126,11 @@ fun FormFieldRegister(
                 label = { Text("Enter $label") },
                 placeholder = { Text("Enter $label") },
                 value = textState,
-                onValueChange = onTextChange,
+                onValueChange = { newValue ->
+                    if (newValue.all { it.isDigit() }) {
+                        onTextChange(newValue)
+                    }
+                },
                 modifier = Modifier
                     .padding(start = 16.dp)
                     .weight(2f),
@@ -139,11 +143,7 @@ fun FormFieldRegister(
                 label = { Text("Enter $label") },
                 placeholder = { Text("Enter $label") },
                 value = textState,
-                onValueChange = { newValue ->
-                    if (newValue.all { it.isDigit() }) {
-                        onTextChange(newValue)
-                    }
-                },
+                onValueChange = onTextChange,
                 modifier = Modifier
                     .padding(start = 16.dp)
                     .weight(2f),
